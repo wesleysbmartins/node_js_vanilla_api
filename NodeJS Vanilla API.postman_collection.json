@@ -1,0 +1,664 @@
+{
+	"info": {
+		"_postman_id": "5dc5c21e-2d89-4b1b-912c-1cb99b741656",
+		"name": "NodeJS Vanilla API",
+		"description": "# 📄 Introdução\n\nEssa é uma API REST desenvolvida usando apenas recursos nativos do Javascript e do NodeJS, escrita em Typescript, utilizando recurso de build que transpila o código TS para JS, com testes unitários e de integração utilizando Jest e container Docker.\n\n## Funcionalidades\n\n- Criação de usuários.\n    \n- Atualização de usuários.\n    \n- Busca por usuários.\n    \n- Deleção de usuários.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17242953"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Naruto Uzumaki\",\r\n    \"username\": \"nuzumaki\",\r\n    \"password\": \"10203040\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{env}}/users",
+							"protocol": "http",
+							"host": [
+								"{{env}}"
+							],
+							"path": [
+								"users"
+							]
+						},
+						"description": "Essa request espera obrigatóriamente no body informações como \"name\", \"username\" e \"password\", onde todos são valores de texto ou strings.\n\nO \"username\" é validado para que exista um uníco usuário para cada nome de usuário. Caso tente criar um usuário com um nome de usuário que pertence a outro usuário, você não conseguira."
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Naruto Uzumaki\",\r\n    \"username\": \"nuzumaki\",\r\n    \"password\": \"10203040\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/users",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"users"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\r\n    \"status\": 201,\r\n    \"data\": \"User created with success!\"\r\n}"
+						},
+						{
+							"name": "UsernameException",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Naruto Uzumaki\",\r\n    \"username\": \"nuzumaki\",\r\n    \"password\": \"10203040\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/users",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"users"
+									]
+								}
+							},
+							"status": "Conflict",
+							"code": 409,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\r\n    \"status\": 409,\r\n    \"messageError\": \"Username alreadly in use!\"\r\n}"
+						},
+						{
+							"name": "ParamException",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Naruto Uzumaki\",\r\n    \"username\": \"nuzumaki\",\r\n    \"password\": \"10203040\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/users",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"users"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\r\n    \"status\": 400,\r\n    \"messageError\": \"Param name is required!\"\r\n}"
+						}
+					]
+				},
+				{
+					"name": "Update",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"name\": \"Sasuke Uchiha\",\r\n    \"username\": \"suchiha\",\r\n    \"password\": \"90807060\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://{{env}}/users",
+							"protocol": "http",
+							"host": [
+								"{{env}}"
+							],
+							"path": [
+								"users"
+							]
+						},
+						"description": "Essa request espera obrigatóriamente no body informações como \"id\", \"name\", \"username\" e \"password\", onde todos são valores de texto ou strings, exceto o \"id\", que representa um valor numérico.\n\nCom o \"id\" fornecido será realizado a busca pelo usuário e ele será sobrescrito pelas informações restantes fornecidas."
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": 1,\r\n    \"name\": \"Sasuke Uchiha\",\r\n    \"username\": \"suchiha\",\r\n    \"password\": \"90807060\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/users",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"users"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\r\n    \"status\": 200,\r\n    \"data\": \"User updated with success!\"\r\n}"
+						},
+						{
+							"name": "ParamException",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": 1,\r\n    \"name\": \"Sasuke Uchiha\",\r\n    \"username\": \"suchiha\",\r\n    \"password\": \"90807060\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/users",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"users"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 400,\n    \"messageError\": \"Param id is required!\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Find",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://{{env}}/users?id=1&name=Wesley Martins&username=wmartins",
+							"protocol": "http",
+							"host": [
+								"{{env}}"
+							],
+							"path": [
+								"users"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1",
+									"description": "id do usuário"
+								},
+								{
+									"key": "name",
+									"value": "Wesley Martins",
+									"description": "nome do usuário"
+								},
+								{
+									"key": "username",
+									"value": "wmartins",
+									"description": "username do usuário"
+								}
+							]
+						},
+						"description": "Essa request espera um query params com informações como \"id\", \"name\", \"username\", que serão utilizados como filtros para busca de usuários, você pode usar todos eles e também apenas um, caso não use nenhum filtro você receberá uma lista de todos os usuários existentes."
+					},
+					"response": [
+						{
+							"name": "FindOne",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/users?id=3",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"users"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "3"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\r\n    \"status\": 200,\r\n    \"data\": {\r\n        \"id\": 3,\r\n        \"name\": \"Sakura Haruno\",\r\n        \"username\": \"sharuno\",\r\n        \"password\": \"01020304\"\r\n    }\r\n}"
+						},
+						{
+							"name": "FindAll",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://{{env}}/users",
+									"protocol": "http",
+									"host": [
+										"{{env}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 200,\n    \"data\": [\n        {\n            \"id\": 3,\n            \"name\": \"Sakura Haruno\",\n            \"username\": \"sharuno\",\n            \"password\": \"01020304\"\n        },\n        {\n            \"id\": 2,\n            \"name\": \"Sasuke Uchiha\",\n            \"username\": \"suchiha\",\n            \"password\": \"30306060\"\n        },\n        {\n            \"id\": 1,\n            \"name\": \"Naruto Uzumaki\",\n            \"username\": \"nuzumaki\",\n            \"password\": \"70809040\"\n        }\n    ]\n}"
+						},
+						{
+							"name": "NoUsersFoundException",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://{{env}}/users?username=nhyuga",
+									"protocol": "http",
+									"host": [
+										"{{env}}"
+									],
+									"path": [
+										"users"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "15",
+											"description": "id de usuário que pode não existir",
+											"disabled": true
+										},
+										{
+											"key": "name",
+											"value": "Neji Hyuga",
+											"description": "nome de usuário que pode não existir",
+											"disabled": true
+										},
+										{
+											"key": "username",
+											"value": "nhyuga",
+											"description": "username que pode não existir"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\r\n    \"status\": 404,\r\n    \"messageError\": \"No users found!\"\r\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://{{env}}/users?id=1",
+							"protocol": "http",
+							"host": [
+								"{{env}}"
+							],
+							"path": [
+								"users"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1",
+									"description": "id do usuário"
+								}
+							]
+						},
+						"description": "Essa request espera obrigatóriamente no query params o \"id\" do usuário no qual deseja deletar, caso não o envie corretamente você terá uma exceção."
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/users?id=1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"users"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "1",
+											"description": "id do usuário"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 200,\n    \"data\": \"User deleted with success!\"\n}"
+						},
+						{
+							"name": "UserNotFoundException",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://{{env}}/users?id=1",
+									"protocol": "http",
+									"host": [
+										"{{env}}"
+									],
+									"path": [
+										"users"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "1",
+											"description": "id do usuário que pode não existir"
+										}
+									]
+								}
+							},
+							"status": "Conflict",
+							"code": 409,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\r\n    \"status\": 409,\r\n    \"messageError\": \"User not found!\"\r\n}"
+						},
+						{
+							"name": "UserIdException",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://{{env}}/users?id=1",
+									"protocol": "http",
+									"host": [
+										"{{env}}"
+									],
+									"path": [
+										"users"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "1",
+											"description": "id do usuário"
+										}
+									]
+								}
+							},
+							"status": "Unprocessable Content",
+							"code": 422,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": 422,\n    \"data\": \"Param id is required!\"\n}"
+						}
+					]
+				}
+			],
+			"description": "Não precisaremos de mecanismo de Autenticação por enquanto, isso será implementado futuramente.",
+			"auth": {
+				"type": "noauth"
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": [
+			{
+				"key": "key",
+				"value": "X-API-Key",
+				"type": "string"
+			},
+			{
+				"key": "value",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://farming-simulator.pstmn.io"
+		}
+	]
+}
