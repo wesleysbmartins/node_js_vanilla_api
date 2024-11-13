@@ -1,4 +1,3 @@
-import { ParsedUrlQuery } from "querystring";
 import { User } from "../entities/user";
 import { UseCaseResponse } from "./usecases_response";
 
