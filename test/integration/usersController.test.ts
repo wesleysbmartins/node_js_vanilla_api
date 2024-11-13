@@ -41,7 +41,7 @@ describe("Testes de integração de Users", () => {
             password: "1234",
         });
 
-        expect(response.body).toEqual({ status: 201, data: "User created with Success!" });
+        expect(response.body).toEqual({ status: 207, data: "User created with Success!" });
     });
 
     test("Atualizando usuário", async () => {
